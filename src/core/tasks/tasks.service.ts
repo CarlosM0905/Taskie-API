@@ -17,12 +17,12 @@ export class TasksService {
     private taskRepository: Repository<Task>,
   ) {}
 
-  async getTasks(body: GetTasks) {
+  async getTasks(query: GetTasks) {
     try {
       const tasks = await this.taskRepository
         .createQueryBuilder('task')
         .select(['task'])
-        .where('task.user_user_id = :user_id', { user_id: body.user_id })
+        .where('task.user_user_id = :user_id', { user_id: query.user_id })
         .where('task.task_deleted = :deleted', { deleted: false })
         .getMany();
       return tasks;

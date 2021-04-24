@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateTask } from './dto/createTask.dto';
 import { GetTasks } from './dto/getTasks.dto';
@@ -17,8 +18,8 @@ export class TasksController {
   constructor(private taskService: TasksService) {}
 
   @Get('/')
-  async getTasks(@Body() body: GetTasks) {
-    const tasks = await this.taskService.getTasks(body);
+  async getTasks(@Query() query: GetTasks) {
+    const tasks = await this.taskService.getTasks(query);
     return tasks;
   }
   @Post('/')
